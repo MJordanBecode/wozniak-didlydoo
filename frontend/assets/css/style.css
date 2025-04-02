@@ -1,0 +1,4 @@
+/* Importation of all CSS module   */
+
+@import './header/header.css';
+@import './footer/footer.css'
