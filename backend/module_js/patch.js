@@ -1,5 +1,5 @@
 
-export default async function patchApi(id){
+export default async function patchApi(id, data){
 
     try {
 
@@ -15,8 +15,8 @@ export default async function patchApi(id){
             throw new Error(`Erreur HTTP: ${response.status}`);
         }
 
-        const data = await response.json();
-
+        const result = await response.json();
+        console.log(result);
     } catch (error) {
         console.error('error 500 : ', error);
     }
