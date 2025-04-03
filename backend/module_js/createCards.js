@@ -40,29 +40,29 @@ for(let i = 0; i < data.length; i++){
         CARD_SELECT.appendChild(CONTAINER_TABLE_SELECT);
         //create a container who's the array whit the name of all attendees and all the dates to check if the attendee is availible 
         
-        for(let j = 0; j < data[i].attendees.lenth; j++){ //create the axe Y of the array with all the name of the attendee
-            const NAME_TABLE_SELECT = document.createElement("div");
-            NAME_TABLE_SELECT.className = "nameTableau";
-            NAME_TABLE_SELECT.innerHTML = `${data[i].attendees[j].name}`
-            CONTAINER_TABLE_SELECT.appendChild(NAME_TABLE_SELECT);
-            //create a container for the name of the attendee in the array 
+        for(let j = 0; j < data[i].attendees.length; j++){ //create the axe Y of the array with all the name of the attendee
+             const NAME_TABLE_SELECT = document.createElement("div");
+             NAME_TABLE_SELECT.className = "nameTableau";
+             NAME_TABLE_SELECT.innerHTML = `${data[i].attendees[j].name}`
+             CONTAINER_TABLE_SELECT.appendChild(NAME_TABLE_SELECT);
+             //create a container for the name of the attendee in the array 
             
-            for(let k = 0; k < data[i].attendees[j].date.lenth ; k++){ //create the body of the array with each confirmartion link to a name and a date 
-            const CONFIRMATION_TABLE_SELECT = document.createElement("div");
-            CONFIRMATION_TABLE_SELECT.className = "confirmationTableau";
-            CONFIRMATION_TABLE_SELECT.innerHTML = `${data[i].attendees[j].date[k]}`
-            CONTAINER_TABLE_SELECT.appendChild(CONFIRMATION_TABLE_SELECT);
-            //create a container who's display if the attendee is free for a specifique date ine the array
-            }
-        }
-        for(let l = 0; l < data[i].dates.length ;l++){ // create the axe X of the array with all the date 
-            const DATE_TABLE_SELECT = document.createElement("div");
-            DATE_TABLE_SELECT.className = "dateTableau";
-            DATE_TABLE_SELECT.innerHTML = `${data[i].date[l]}`
-            CONTAINER_TABLE_SELECT.appendChild(DATE_TABLE_SELECT);
-            //create a container for the date in the array
+             for(let k = 0; k < data[i].attendees[j].date.length ; k++){ //create the body of the array with each confirmartion link to a name and a date 
+             const CONFIRMATION_TABLE_SELECT = document.createElement("div");
+             CONFIRMATION_TABLE_SELECT.className = "confirmationTableau";
+             CONFIRMATION_TABLE_SELECT.innerHTML = `${data[i].attendees[j].date[k]}`
+             CONTAINER_TABLE_SELECT.appendChild(CONFIRMATION_TABLE_SELECT);
+             //create a container who's display if the attendee is free for a specifique date ine the array
+             }
+         }
+         for(let l = 0; l < data[i].dates.length ;l++){ // create the axe X of the array with all the date 
+             const DATE_TABLE_SELECT = document.createElement("div");
+             DATE_TABLE_SELECT.className = "dateTableau";
+             DATE_TABLE_SELECT.innerHTML = `${data[i].date[l]}`
+             CONTAINER_TABLE_SELECT.appendChild(DATE_TABLE_SELECT);
+             //create a container for the date in the array
             
-        }
+         }
         
 
         const IMG_MENU_SELECT = document.createElement("img");
