@@ -1,5 +1,31 @@
 [
   {
+    "id": "9f9a36ce1c51",
+    "name": "Event3",
+    "author": "Author3",
+    "description": "Desc3",
+    "dates": [
+      "2025-04-18"
+    ],
+    "created_at": "2025-04-03T11:56:51.199Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-03T11:56:51.199Z",
+    "attendees": []
+  },
+  {
+    "id": "3bdcbcf43f61",
+    "name": "Event2",
+    "author": "Author2",
+    "description": "Desc3",
+    "dates": [
+      "2025-04-26"
+    ],
+    "created_at": "2025-04-03T10:43:00.479Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-03T10:43:00.479Z",
+    "attendees": []
+  },
+  {
     "id": "6386b09178b0",
     "name": "Event1",
     "author": "Author1",
@@ -11,7 +37,17 @@
     "created_at": "2025-04-02T19:00:50.712Z",
     "num_modification": 0,
     "last_modification": "2025-04-02T19:00:50.712Z",
-    "attendees": []
+    "attendees": [
+      {
+        "name": "Michou",
+        "dates": [
+          {
+            "date": "2022-01-10",
+            "available": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "f5b6564b5dc4",

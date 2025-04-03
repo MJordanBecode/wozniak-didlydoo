@@ -14,5 +14,8 @@
   "devDependencies": {
     "vite": "^4.0.0"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "dompurify": "^3.2.4"
+  }
 }

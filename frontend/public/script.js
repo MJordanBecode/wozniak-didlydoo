@@ -1,6 +1,7 @@
 import { toggleForm, clearErrorMessagesForDate, updateDatesList } from '../scripts/ui.js';
 import { validateField, validateInputs } from '../scripts/formValidation.js';
 import { submitNewEvent } from '../scripts/eventHandler.js';
+import { createCards } from "../../backend/module_js/createCards.js";
 
 const showFormBtn = document.getElementById("showFormBtn");
 const eventForm = document.getElementById("eventForm");
@@ -51,3 +52,5 @@ const handleFormSubmit = async (e) => {
 
     await submitNewEvent(newEvent);
 };
+
+createCards()
