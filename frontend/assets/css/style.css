@@ -26,10 +26,23 @@ h2 {
   display: none;
 }
 
+#eventForm {
+  position: relative;
+}
+
 label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 input {
