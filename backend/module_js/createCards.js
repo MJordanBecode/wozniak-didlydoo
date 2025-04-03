@@ -1,5 +1,7 @@
+import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
+import patchApi from "./patch.js";
 
 export async function createCards() {
   const data = await getAllEvent();
@@ -202,22 +204,124 @@ window.addEventListener("click", (event) => {
 });
 
 async function deleteEvent(id) {
-    const isDeleted = await deleteApi(id);
-    
-    if (isDeleted) {
-        const eventCard = document.querySelector(`[data-event-id="${id}"]`);
-        if (eventCard) {
-            eventCard.remove();
-        }
-        console.log(`Event with ID ${id} deleted successfully.`);
-    } else {
-        console.error(`Failed to delete event with ID ${id}.`);
+  const isDeleted = await deleteApi(id);
+
+  if (isDeleted) {
+    const eventCard = document.querySelector(`[data-event-id="${id}"]`);
+    if (eventCard) {
+      eventCard.remove();
     }
+    console.log(`Event with ID ${id} deleted successfully.`);
+  } else {
+    console.error(`Failed to delete event with ID ${id}.`);
+  }
 }
 
-function editEvent(event) {
-  console.log("Editing event:", event);
-}
+export const editEvent = async (eventData) => {
+  let modal = document.getElementById("editEventModal");
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "editEventModal";
+    modal.className = "modal";
+    modal.innerHTML = `
+        <div class="modal-content">
+          <h2>Edit Event</h2>
+          <form id="editEventForm">
+           <div id="closeEditModal">
+            <img id="closeFormIcon" src="assets/icons/cross-icon.svg" alt="Close Form" class="close-icon">
+           </div> 
+            <label for="editEventName">Event Name:</label>
+            <input type="text" id="editEventName" />
+            <span class="error-message" id="editEventNameError"></span>
+            
+            <label for="editEventAuthor">Author:</label>
+            <input type="text" id="editEventAuthor" />
+            <span class="error-message" id="editEventAuthorError"></span>
+            
+            <label for="editEventDescription">Description:</label>
+            <input type="text" id="editEventDescription" />
+            <span class="error-message" id="editEventDescriptionError"></span>
+            
+            <label for="editEventDates">Date:</label>
+            <input type="date" id="editEventDates" placeholder="Add new date" />
+            <button type="button" id="addEditDateBtn">Add Date</button>
+            <span class="error-message" id="editEventDatesError"></span>
+            
+            <ul id="selectedEditDatesList"></ul>
+            
+            <button type="submit">Update Event</button>
+          </form>
+        </div>
+      `;
+    document.body.appendChild(modal);
+
+    document.getElementById("closeEditModal").addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
+
+  document.getElementById("editEventName").value = eventData.name;
+  document.getElementById("editEventAuthor").value = eventData.author;
+  document.getElementById("editEventDescription").value = eventData.description;
+
+  let selectedEditDates = [...eventData.dates];
+  const selectedDatesList = document.getElementById("selectedEditDatesList");
+
+  const updateEditDatesList = () => {
+    selectedDatesList.innerHTML = "";
+    selectedEditDates.sort((a, b) => new Date(getDate(a)) - new Date(getDate(b)));
+    selectedEditDates.forEach((date, idx) => {
+      const li = document.createElement("li");
+      li.textContent = getDate(date);
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = "x";
+      removeBtn.addEventListener("click", () => {
+        selectedEditDates.splice(idx, 1);
+        updateEditDatesList();
+      });
+      li.appendChild(removeBtn);
+      selectedDatesList.appendChild(li);
+    });
+  };
+  updateEditDatesList();
+
+  document.getElementById("addEditDateBtn").addEventListener("click", () => {
+    const dateInput = document.getElementById("editEventDates");
+    const newDate = dateInput.value;
+    if (newDate && !selectedEditDates.includes(newDate)) {
+      selectedEditDates.push(newDate);
+      updateEditDatesList();
+    }
+    dateInput.value = "";
+  });
+
+  const editForm = document.getElementById("editEventForm");
+  editForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const updatedEvent = {
+      name: document.getElementById("editEventName").value.trim(),
+      author: document.getElementById("editEventAuthor").value.trim(),
+      description: document.getElementById("editEventDescription").value.trim(),
+      dates: selectedEditDates,
+    };
+    try {
+      await patchApi(eventData.id, updatedEvent);
+      showSnackbar("Event updated successfully!", "green");
+      modal.style.display = "none";
+    } catch (error) {
+      showSnackbar("Error updating event", "red");
+      console.log(error);
+    }
+  };
+
+  modal.style.display = "flex";
+};
 
 function acceptEvent(id) {
   console.log(`Accepting event with ID: ${id}`);
@@ -230,3 +334,9 @@ function rejectEvent(id) {
 function showLogs(id) {
   console.log(`Showing logs for event ID: ${id}`);
 }
+
+const getDate = (dateValue) => {
+  return typeof dateValue === "object" && dateValue !== null
+    ? dateValue.date
+    : dateValue;
+};
