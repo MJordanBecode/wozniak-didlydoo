@@ -4,15 +4,18 @@
   "description": "",
   "license": "ISC",
   "author": "",
-  "type": "module",  
-  "main": "index.html",  
+  "type": "module",
+  "main": "index.html",
   "scripts": {
-    "dev": "vite",         
-    "build": "vite build", 
-    "serve": "vite preview" 
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "devDependencies": {
-    "vite": "^4.0.0"  
+    "vite": "^4.0.0"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "dompurify": "^3.2.4"
+  }
 }
