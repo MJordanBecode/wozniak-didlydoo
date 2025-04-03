@@ -2,7 +2,7 @@ import DOMPurify from 'dompurify';
 
 /**
  * Sanitize une entrée utilisateur pour éviter les attaques XSS.
- * 
+ * status : working
  * @param {string} element - La donnée à nettoyer.
  * @param {boolean} strict - Si `true`, supprime toutes les balises HTML.
  * @returns {string} - La version sécurisée de l'entrée.
