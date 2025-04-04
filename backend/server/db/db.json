@@ -1,5 +1,18 @@
 [
   {
+    "id": "5e786179d8fd",
+    "name": "Event1Edited",
+    "author": "Author1",
+    "description": "Desc1",
+    "dates": [
+      "2025-04-19"
+    ],
+    "created_at": "2025-04-03T18:53:38.594Z",
+    "num_modification": 1,
+    "last_modification": "2025-04-04T07:53:05.825Z",
+    "attendees": []
+  },
+  {
     "id": "f5b6564b5dc4",
     "name": "My sweet 16",
     "description": "I am going to be 16, let us all party together! Help me pick a date so we can go together",
