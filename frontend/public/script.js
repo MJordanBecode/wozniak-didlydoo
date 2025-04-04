@@ -17,6 +17,11 @@ document.getElementById("eventForm").addEventListener("submit", (e) => handleFor
 eventNameInput.addEventListener("input", () => validateField(eventNameInput, "eventName"));
 eventAuthorInput.addEventListener("input", () => validateField(eventAuthorInput, "eventAuthor"));
 eventDescriptionInput.addEventListener("input", () => validateField(eventDescriptionInput, "eventDescription"));
+const closeFormIcon = document.getElementById("closeFormIcon");
+
+closeFormIcon.addEventListener("click", () => {
+    toggleForm(false);
+});
 
 const addDateToList = () => {
     const eventDatesInput = document.getElementById("eventDates");

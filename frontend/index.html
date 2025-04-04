@@ -18,6 +18,8 @@
         <button id="showFormBtn">Add an Event</button>
       
         <form id="eventForm" class="hidden">
+          <img id="closeFormIcon" src="assets/icons/cross-icon.svg" alt="Close Form" class="close-icon">
+          
           <label for="eventName">Event Name:</label>
           <input type="text" id="eventName" />
           <span class="error-message" id="eventNameError"></span>
@@ -42,5 +44,16 @@
       </div>
       
       <div id="snackbar"></div>
+
+      <div class="events"></div>
+
+      <div id="attendeeModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <h2>Attendee List</h2>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    
   </body>
 </html>
