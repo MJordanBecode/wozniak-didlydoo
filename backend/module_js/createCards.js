@@ -153,7 +153,7 @@ function openAttendeeModal(dates) {
   });
 
   TABLE.appendChild(HEADER_ROW);
-
+  let numOfCheck =[];
   dates.forEach((date) => {
     const ROW = document.createElement("tr");
 
@@ -175,15 +175,22 @@ function openAttendeeModal(dates) {
 
       if (attendee.available === true) {
         ICON.src = "assets/icons/accept-icon.svg";
+        ICON.className = "okCheck";
       } else if (attendee.available === false) {
         ICON.src = "assets/icons/cross-icon.svg";
+        ICON.className = "notOK";
       } else {
         ICON.src = "assets/icons/question-icon.svg";
+        ICON.className = "notOK";
       }
 
       CELL.appendChild(ICON);
       ROW.appendChild(CELL);
     });
+    let okCheck = ROW.getElementsByClassName("okCheck");
+    
+    numOfCheck.push(okCheck.length)
+    console.log("teeeeeeeeeeeeeeeessssssssssst",numOfCheck)
 
     TABLE.appendChild(ROW);
   });
