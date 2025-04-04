@@ -16,7 +16,6 @@ export default async function patchApi(id, data){
         }
 
         const result = await response.json();
-        console.log(result);
     } catch (error) {
         console.error('error 500 : ', error);
     }
