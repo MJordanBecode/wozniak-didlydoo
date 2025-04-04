@@ -1,10 +1,11 @@
 import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
-import patchApi from "./patch.js";
+import patchApi, { attendEventApi, rejectEventApi } from "./patch.js";
+
+const data = await getAllEvent();
 
 export async function createCards() {
-  const data = await getAllEvent();
 
   const EVENTS_CONTAINER = document.querySelector(".events");
 
@@ -322,12 +323,76 @@ export const editEvent = async (eventData) => {
   modal.style.display = "flex";
 };
 
-function acceptEvent(id) {
-  console.log(`Accepting event with ID: ${id}`);
+function openAttendanceForm(eventId, actionType, availableDates = []) {
+  let modal = document.getElementById("attendanceFormModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "attendanceFormModal";
+    modal.className = "modal";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+    <div class="modal-content">
+      <h2>${actionType === "accept" ? "Accept Event" : "Reject Event"}</h2>
+      <form id="attendanceForm">
+        <label for="attendeeName">Your Name:</label>
+        <input type="text" id="attendeeName" required />
+
+        <label>Select Dates:</label>
+        <div class="date-checkbox-group">
+          ${availableDates.map(d => `
+            <label class="checkbox-container">
+              <input type="checkbox" name="selectedDates" value="${d.date}" />
+              ${d.date}
+              <span class="checkmark"></span>
+            </label>
+          `).join('')}
+        </div>
+
+        <button type="submit">${actionType === "accept" ? "Accept" : "Reject"}</button>
+      </form>
+    </div>
+  `;
+
+  modal.style.display = "block";
+
+  const form = document.getElementById("attendanceForm");
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const attendeeName = document.getElementById("attendeeName").value.trim();
+    const selectedDates = [...document.querySelectorAll("input[name='selectedDates']:checked")].map(input => input.value);
+
+    if (!attendeeName || selectedDates.length === 0) {
+      alert("Please enter your name and select at least one date.");
+      return;
+    }
+
+    try {
+      if (actionType === "accept") {
+        await attendEventApi(eventId, attendeeName, selectedDates);
+        showSnackbar("Attendance confirmed!", "green");
+      } else {
+        await rejectEventApi(eventId, attendeeName, selectedDates);
+        showSnackbar("Event rejected successfully!", "green");
+      }
+      modal.style.display = "none";
+    } catch (error) {
+      console.error("Error submitting attendance:", error);
+      showSnackbar("Error submitting attendance", "red");
+    }
+  };
 }
 
-function rejectEvent(id) {
-  console.log(`Rejecting event with ID: ${id}`);
+function acceptEvent(eventId) {
+  const dates = data.find((event) => event.id === eventId).dates || null;
+  openAttendanceForm(eventId, "accept", dates);
+}
+
+function rejectEvent(eventId) {
+  const dates = data.find((event) => event.id === eventId).dates || null;
+  openAttendanceForm(eventId, "reject", dates);
 }
 
 function showLogs(id) {

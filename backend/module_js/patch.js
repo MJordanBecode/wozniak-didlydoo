@@ -20,3 +20,50 @@ export default async function patchApi(id, data){
         console.error('error 500 : ', error);
     }
 }
+
+export async function attendEventApi(eventId, name, availableDates) {
+    const apiUrl = `http://localhost:3000/api/events/${eventId}/attend`;
+    
+    const requestBody = {
+        name,
+        dates: availableDates.map(date => ({ date, available: true }))
+    };
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody),
+        });
+
+        if (!response.ok) {
+            console.warn("POST failed, trying PATCH...");
+            await fetch(apiUrl, {
+                method: "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestBody),
+            });
+        }
+    } catch (error) {
+        console.error("Error accepting event:", error);
+    }
+}
+
+export async function rejectEventApi(eventId, name, eventDates) {
+    const apiUrl = `http://localhost:3000/api/events/${eventId}/attend`;
+
+    const requestBody = {
+        name,
+        dates: eventDates.map(date => ({ date, available: false }))
+    };
+
+    try {
+        await fetch(apiUrl, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(requestBody),
+        });
+    } catch (error) {
+        console.error("Error rejecting event:", error);
+    }
+}

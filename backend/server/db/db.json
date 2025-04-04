@@ -1,5 +1,41 @@
 [
   {
+    "id": "83be6c13c7e0",
+    "name": "Event2",
+    "author": "Author2",
+    "description": "Desc3",
+    "dates": [
+      "2025-04-19",
+      "2025-04-22",
+      "2025-04-27"
+    ],
+    "created_at": "2025-04-04T16:21:57.976Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T16:21:57.976Z",
+    "attendees": [
+      {
+        "name": "Mariia",
+        "dates": [
+          {
+            "date": "2025-04-27"
+          },
+          {
+            "date": "2025-04-19"
+          }
+        ]
+      },
+      {
+        "name": "Michou",
+        "dates": [
+          {
+            "date": "2025-04-27",
+            "available": false
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "5e786179d8fd",
     "name": "Event1Edited",
     "author": "Author1",
@@ -10,7 +46,35 @@
     "created_at": "2025-04-03T18:53:38.594Z",
     "num_modification": 1,
     "last_modification": "2025-04-04T07:53:05.825Z",
-    "attendees": []
+    "attendees": [
+      {
+        "name": "Mariia",
+        "dates": [
+          {
+            "date": "2025-04-19",
+            "available": false
+          }
+        ]
+      },
+      {
+        "name": "Michou",
+        "dates": [
+          {
+            "date": "2025-04-19",
+            "available": true
+          }
+        ]
+      },
+      {
+        "name": "yydjf",
+        "dates": [
+          {
+            "date": "2025-04-19",
+            "available": true
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "f5b6564b5dc4",
@@ -28,15 +92,7 @@
         "name": "Michou",
         "dates": [
           {
-            "date": "2022-03-17",
-            "available": true
-          },
-          {
-            "date": "2022-03-18",
-            "available": false
-          },
-          {
-            "date": "2022-03-21",
+            "date": "2022-03-22",
             "available": true
           }
         ]
