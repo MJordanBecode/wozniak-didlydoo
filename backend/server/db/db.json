@@ -1,5 +1,58 @@
 [
   {
+    "id": "3f30e3e5fbb6",
+    "name": "hnghcghjdghjdg",
+    "author": "ghjdghjdgh",
+    "description": "ghndfgh",
+    "dates": [
+      "2025-04-27"
+    ],
+    "created_at": "2025-04-04T23:21:28.154Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T23:21:28.154Z",
+    "attendees": []
+  },
+  {
+    "id": "e2a69ffa9d18",
+    "name": "hdhdhyd",
+    "author": "Author1",
+    "description": "ghng",
+    "dates": [
+      "2025-04-18",
+      "2025-04-20"
+    ],
+    "created_at": "2025-04-04T23:21:17.120Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T23:21:17.120Z",
+    "attendees": []
+  },
+  {
+    "id": "cf7ed82491e6",
+    "name": "Event2",
+    "author": "gsfgsfg",
+    "description": "ghndfgh",
+    "dates": [
+      "2025-04-19"
+    ],
+    "created_at": "2025-04-04T23:07:51.383Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T23:07:51.383Z",
+    "attendees": []
+  },
+  {
+    "id": "5744e816e392",
+    "name": "gdfgbhsf",
+    "author": "gdhdfg",
+    "description": "ghndfgh",
+    "dates": [
+      "2025-04-20"
+    ],
+    "created_at": "2025-04-04T23:03:02.337Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T23:03:02.337Z",
+    "attendees": []
+  },
+  {
     "id": "9792856e47de",
     "name": "Event1gfgs",
     "author": "gsfgsfg",
@@ -19,19 +72,19 @@
         "dates": [
           {
             "date": "2025-04-11",
-            "available": true
+            "available": false
           },
           {
             "date": "2025-04-15",
-            "available": false
+            "available": true
           },
           {
             "date": "2025-04-22",
-            "available": false
+            "available": true
           },
           {
             "date": "2025-04-27",
-            "available": true
+            "available": false
           }
         ]
       },

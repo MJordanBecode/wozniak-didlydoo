@@ -1,25 +1,38 @@
 @import "./header/header.css";
 @import "./footer/footer.css";
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f8ff;
   color: #333;
   text-align: center;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .container {
+  min-width: 450px;
   max-width: 600px;
-  margin: auto;
+  margin: 30px auto;
   background: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  color: #008080;
 }
 
 .hidden {
@@ -36,7 +49,8 @@ label {
   font-weight: bold;
 }
 
-#closeEditModal, #closeFormIcon {
+#closeEditModal,
+#closeFormIcon {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -63,6 +77,17 @@ input {
   display: block;
 }
 
+#showFormBtn {
+  background-color: #008080;
+  color: white;
+  border: none;
+  padding: 20px 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 30px;
+  font-size: 16px;
+}
+
 button {
   background-color: #008080;
   color: white;
@@ -70,10 +95,11 @@ button {
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 10px;
+  font-size: 16px;
+  margin: 15px 0;
 }
 
-button:hover {
+#showFormBtn:hover, button:hover {
   background-color: #005f5f;
 }
 
@@ -165,6 +191,7 @@ li button:hover {
 .events {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cardEvent {
@@ -282,7 +309,7 @@ li button:hover {
 }
 
 .modal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -299,9 +326,9 @@ li button:hover {
   padding: 20px;
   border-radius: 10px;
   width: 90%;
-  max-width: 500px; 
+  max-width: 500px;
   max-height: 70vh;
-  overflow-y: auto; 
+  overflow-y: auto;
   text-align: center;
   position: relative;
 }
@@ -316,6 +343,17 @@ li button:hover {
 
 .close:hover {
   color: darkred;
+}
+
+.close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 
 .date-checkbox-group {

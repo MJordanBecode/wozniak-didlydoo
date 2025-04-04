@@ -270,7 +270,9 @@ export const editEvent = async (eventData) => {
 
   const updateEditDatesList = () => {
     selectedDatesList.innerHTML = "";
-    selectedEditDates.sort((a, b) => new Date(getDate(a)) - new Date(getDate(b)));
+    selectedEditDates.sort(
+      (a, b) => new Date(getDate(a)) - new Date(getDate(b))
+    );
     selectedEditDates.forEach((date, idx) => {
       const li = document.createElement("li");
       li.textContent = getDate(date);
@@ -328,35 +330,56 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
   }
 
   modal.innerHTML = `
-    <div class="modal-content">
-      <h2>Accept Event</h2>
-      <form id="attendanceForm">
-        <label for="attendeeName">Your Name:</label>
-        <input type="text" id="attendeeName" required />
-
-        <label>Select Dates:</label>
-        <div class="date-checkbox-group">
-          ${availableDates.map(d => `
-            <label class="checkbox-container">
-              <input type="checkbox" name="selectedDates" value="${d.date}" />
-              ${d.date}
-              <span class="checkmark"></span>
-            </label>
-          `).join('')}
-        </div>
-
-        <button type="submit">Accept</button>
-      </form>
+  <div class="modal-content">
+    <div id="closeAttendanceModal" class="close-icon-container">
+      <img src="assets/icons/cross-icon.svg" alt="Close" class="close-icon" />
     </div>
-  `;
+    <h2>Accept Event</h2>
+    <form id="attendanceForm">
+      <label for="attendeeName">Your Name:</label>
+      <input type="text" id="attendeeName" required />
 
-  modal.style.display = "block";
+      <label>Select Dates:</label>
+      <div class="date-checkbox-group">
+        ${availableDates
+          .map(
+            (d) => `
+          <label class="checkbox-container">
+            <input type="checkbox" name="selectedDates" value="${d.date}" />
+            ${d.date}
+            <span class="checkmark"></span>
+          </label>
+        `
+          )
+          .join("")}
+      </div>
+
+      <button type="submit">Accept</button>
+    </form>
+  </div>
+`;
+
+  modal.style.display = "flex";
+
+  document
+    .getElementById("closeAttendanceModal")
+    .addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
 
   const form = document.getElementById("attendanceForm");
   form.onsubmit = async (e) => {
     e.preventDefault();
     const attendeeName = document.getElementById("attendeeName").value.trim();
-    const selectedDates = [...document.querySelectorAll("input[name='selectedDates']:checked")].map(input => input.value);
+    const selectedDates = [
+      ...document.querySelectorAll("input[name='selectedDates']:checked"),
+    ].map((input) => input.value);
 
     if (!attendeeName || selectedDates.length === 0) {
       alert("Please enter your name and select at least one date.");
@@ -364,7 +387,12 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
     }
 
     try {
-      await attendEventApi(eventId, attendeeName, selectedDates, availableDates.map(d => d.date));
+      await attendEventApi(
+        eventId,
+        attendeeName,
+        selectedDates,
+        availableDates.map((d) => d.date)
+      );
       showSnackbar("Attendance updated!", "green");
       modal.style.display = "none";
     } catch (error) {
