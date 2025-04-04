@@ -2,7 +2,10 @@ import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
 import patchApi from "./patch.js";
+import modalLog from "../../frontend/scripts/modal/modalLog.js";
 
+
+const modal_Log = modalLog();
 export async function createCards() {
   const data = await getAllEvent();
 
@@ -56,7 +59,7 @@ export async function createCards() {
       {
         icon: "assets/icons/info-icon.svg",
         text: "Show Logs",
-        action: () => showLogs(data[i].id),
+        action: () => modal_Log.show(),
       },
     ];
 
@@ -339,3 +342,6 @@ const getDate = (dateValue) => {
     ? dateValue.date
     : dateValue;
 };
+
+
+// appelle de la modal 
