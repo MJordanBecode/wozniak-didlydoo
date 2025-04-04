@@ -7,38 +7,51 @@ import * as mw from '../helpers/middlewares.mjs'
 const router = Router()
 
 router.post('/events/:_id/attend', mw.idSpecific, mw.noBody, mw.getElem, mw.validation(createAttendanceSchema), async (req, res, next) => {
-  const db = await getDB()
+  const db = await getDB();
+
   const attendee = {
-    ...req.body,
-    dates: req.body.dates.filter(date => db.data[req._elem].dates.includes(date.date))
-  }
+    name: req.body.name,
+    dates: db.data[req._elem].dates.map(dateStr => {
+      const incoming = req.body.dates.find(d => d.date === dateStr);
+      return {
+        date: dateStr,
+        available: incoming?.available ?? false
+      };
+    })
+  };
 
-  if(db.data[req._elem].attendees.find(a => a.name === attendee.name))
-    return res.status(400).send({error: `Attendee '${attendee.name}' already exists`})
+  if (db.data[req._elem].attendees.find(a => a.name === attendee.name))
+    return res.status(400).send({ error: `Attendee '${attendee.name}' already exists` });
 
-  db.data[req._elem].attendees.push(attendee)
-  await db.write()
+  db.data[req._elem].attendees.push(attendee);
+  await db.write();
 
-  return res.send(remapData(db.data[req._elem]))
-})
+  return res.send(remapData(db.data[req._elem]));
+});
 
 router.patch('/events/:_id/attend', mw.idSpecific, mw.noBody, mw.getElem, mw.validation(createAttendanceSchema), async (req, res, next) => {
-  const db = await getDB()
-  const _attendee = db.data[req._elem].attendees.findIndex(a => a.name === req.body.name)
-  
-  if(_attendee === -1)
-    return res.status(404).send({error: `Attendee '${req.body.name}' does not exist.`})
+  const db = await getDB();
+  const idx = db.data[req._elem].attendees.findIndex(a => a.name === req.body.name);
 
-  const attendee = {
-    ...req.body,
-    dates: req.body.dates.filter(date => db.data[req._elem].dates.includes(date.date))
-  }
+  if (idx === -1)
+    return res.status(404).send({ error: `Attendee '${req.body.name}' does not exist.` });
 
-  db.data[req._elem].attendees[_attendee] = attendee
-  await db.write()
+  const updatedAttendee = {
+    name: req.body.name,
+    dates: db.data[req._elem].dates.map(dateStr => {
+      const incoming = req.body.dates.find(d => d.date === dateStr);
+      return {
+        date: dateStr,
+        available: incoming?.available ?? false
+      };
+    })
+  };
 
-  return res.send(remapData(db.data[req._elem]))
-})
+  db.data[req._elem].attendees[idx] = updatedAttendee;
+  await db.write();
+
+  return res.send(remapData(db.data[req._elem]));
+});
 
 router.get('/attendees/:_name?', async (req, res, next) => {  
   const db = await getDB()

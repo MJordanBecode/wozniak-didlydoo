@@ -1,11 +1,11 @@
 import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
-import patchApi from "./patch.js";
+import patchApi, { attendEventApi } from "./patch.js";
+
+const data = await getAllEvent();
 
 export async function createCards() {
-  const data = await getAllEvent();
-
   const EVENTS_CONTAINER = document.querySelector(".events");
 
   for (let i = 0; i < data.length; i++) {
@@ -46,12 +46,7 @@ export async function createCards() {
       {
         icon: "assets/icons/accept-icon.svg",
         text: "Accept",
-        action: () => acceptEvent(data[i].id),
-      },
-      {
-        icon: "assets/icons/cross-icon.svg",
-        text: "Reject",
-        action: () => rejectEvent(data[i].id),
+        action: () => toggleAttendance(data[i].id),
       },
       {
         icon: "assets/icons/info-icon.svg",
@@ -275,7 +270,9 @@ export const editEvent = async (eventData) => {
 
   const updateEditDatesList = () => {
     selectedDatesList.innerHTML = "";
-    selectedEditDates.sort((a, b) => new Date(getDate(a)) - new Date(getDate(b)));
+    selectedEditDates.sort(
+      (a, b) => new Date(getDate(a)) - new Date(getDate(b))
+    );
     selectedEditDates.forEach((date, idx) => {
       const li = document.createElement("li");
       li.textContent = getDate(date);
@@ -322,12 +319,92 @@ export const editEvent = async (eventData) => {
   modal.style.display = "flex";
 };
 
-function acceptEvent(id) {
-  console.log(`Accepting event with ID: ${id}`);
+function openAttendanceForm(eventId, actionType, availableDates = []) {
+  let modal = document.getElementById("attendanceFormModal");
+
+  if (!modal) {
+    modal = document.createElement("div");
+    modal.id = "attendanceFormModal";
+    modal.className = "modal";
+    document.body.appendChild(modal);
+  }
+
+  modal.innerHTML = `
+  <div class="modal-content">
+    <div id="closeAttendanceModal" class="close-icon-container">
+      <img src="assets/icons/cross-icon.svg" alt="Close" class="close-icon" />
+    </div>
+    <h2>Accept Event</h2>
+    <form id="attendanceForm">
+      <label for="attendeeName">Your Name:</label>
+      <input type="text" id="attendeeName" required />
+
+      <label>Select Dates:</label>
+      <div class="date-checkbox-group">
+        ${availableDates
+          .map(
+            (d) => `
+          <label class="checkbox-container">
+            <input type="checkbox" name="selectedDates" value="${d.date}" />
+            ${d.date}
+            <span class="checkmark"></span>
+          </label>
+        `
+          )
+          .join("")}
+      </div>
+
+      <button type="submit">Accept</button>
+    </form>
+  </div>
+`;
+
+  modal.style.display = "flex";
+
+  document
+    .getElementById("closeAttendanceModal")
+    .addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  const form = document.getElementById("attendanceForm");
+  form.onsubmit = async (e) => {
+    e.preventDefault();
+    const attendeeName = document.getElementById("attendeeName").value.trim();
+    const selectedDates = [
+      ...document.querySelectorAll("input[name='selectedDates']:checked"),
+    ].map((input) => input.value);
+
+    if (!attendeeName || selectedDates.length === 0) {
+      alert("Please enter your name and select at least one date.");
+      return;
+    }
+
+    try {
+      await attendEventApi(
+        eventId,
+        attendeeName,
+        selectedDates,
+        availableDates.map((d) => d.date)
+      );
+      showSnackbar("Attendance updated!", "green");
+      modal.style.display = "none";
+    } catch (error) {
+      console.error("Error submitting attendance:", error);
+      showSnackbar("Error submitting attendance", "red");
+    }
+  };
 }
 
-function rejectEvent(id) {
-  console.log(`Rejecting event with ID: ${id}`);
+function toggleAttendance(eventId) {
+  const dates = data.find((event) => event.id === eventId).dates || null;
+  openAttendanceForm(eventId, "accept", dates);
 }
 
 function showLogs(id) {

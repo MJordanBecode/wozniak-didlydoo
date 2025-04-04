@@ -12,48 +12,65 @@
     <title>Didlydoo</title>
   </head>
   <body>
-    <div class="container">
-        <h2>Didlydoo</h2>
-      
-        <button id="showFormBtn">Add an Event</button>
-      
+    <!-- Header -->
+    <header>
+      <div class="header-container">
+        <img src="public/logo.png" alt="Logo" id="logo" />
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+      <button id="showFormBtn">Add an Event</button>
+      <div class="container hidden">
         <form id="eventForm" class="hidden">
-          <img id="closeFormIcon" src="assets/icons/cross-icon.svg" alt="Close Form" class="close-icon">
-          
+          <img
+            id="closeFormIcon"
+            src="assets/icons/cross-icon.svg"
+            alt="Close Form"
+            class="close-icon"
+          />
+
           <label for="eventName">Event Name:</label>
           <input type="text" id="eventName" />
           <span class="error-message" id="eventNameError"></span>
-      
+
           <label for="eventAuthor">Author:</label>
           <input type="text" id="eventAuthor" />
           <span class="error-message" id="eventAuthorError"></span>
-      
+
           <label for="eventDescription">Description:</label>
           <input type="text" id="eventDescription" />
           <span class="error-message" id="eventDescriptionError"></span>
-      
+
           <label for="eventDates">Date:</label>
           <input type="date" id="eventDates" />
           <button type="button" id="addDateBtn">Add Date</button>
           <span class="error-message" id="eventDatesError"></span>
-      
+
           <ul id="selectedDatesList"></ul>
-      
+
           <button type="submit">Create Event</button>
         </form>
       </div>
-      
+
       <div id="snackbar"></div>
 
       <div class="events"></div>
 
       <div id="attendeeModal" class="modal">
         <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <h2>Attendee List</h2>
-            <div id="modalContent"></div>
+          <span id="closeModal" class="close">&times;</span>
+          <h2>Attendee List</h2>
+          <div id="modalContent"></div>
         </div>
-    </div>
-    
+      </div>
+      
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2025 Didlydoo. All rights reserved.</p>
+    </footer>
   </body>
 </html>
