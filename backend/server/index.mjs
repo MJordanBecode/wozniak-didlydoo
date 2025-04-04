@@ -3,6 +3,7 @@ import cors from 'cors'
 
 import eventsRoute from './routes/events.mjs'
 import attendanceRoute from './routes/attendance.mjs'
+import logRoutes from "./routes/log.mjs";
 
 const PORT = 3000
 const app = express()
@@ -25,5 +26,6 @@ app.get('/', (req, res, next) => res.send({
 
 app.use('/api', eventsRoute)
 app.use('/api', attendanceRoute)
+app.use("/api", logRoutes);
 
 app.listen(PORT, () => console.log(`Server started: http://localhost:${PORT}/`))

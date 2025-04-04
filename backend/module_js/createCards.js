@@ -2,16 +2,22 @@ import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
 import patchApi from "./patch.js";
+import  postLog  from "../log/post.js";
 import modalLog from "../../frontend/scripts/modal/modalLog.js";
 
 
 const modal_Log = modalLog();
+const safeData = [];
 export async function createCards() {
   const data = await getAllEvent();
 
   const EVENTS_CONTAINER = document.querySelector(".events");
 
   for (let i = 0; i < data.length; i++) {
+    
+    safeData.push(data[i]);
+    
+    
     const CARD_SELECT = document.createElement("div");
     CARD_SELECT.className = "cardEvent";
     EVENTS_CONTAINER.appendChild(CARD_SELECT);
@@ -35,6 +41,10 @@ export async function createCards() {
     const MENU_DROPDOWN = document.createElement("div");
     MENU_DROPDOWN.className = "menuDropdown";
 
+    let lastDate = "3";
+    let newDate = "4";
+    let changedElement = "5";
+    let newElement = "6";
     const MENU_ITEMS = [
       {
         icon: "assets/icons/trash-icon.svg",
@@ -57,10 +67,16 @@ export async function createCards() {
         action: () => rejectEvent(data[i].id),
       },
       {
-        icon: "assets/icons/info-icon.svg",
-        text: "Show Logs",
-        action: () => modal_Log.show(),
-      },
+   icon: "assets/icons/info-icon.svg",
+   text: "Show Logs",
+   action: () => {
+       const { id, lastDate, newDate, changedElement, newElement } = data[i];
+       const modal = modalLog(id, lastDate, newDate, changedElement, newElement);
+       modal.show();
+   }
+}
+    
+    
     ];
 
     MENU_ITEMS.forEach((item) => {
@@ -122,7 +138,7 @@ export async function createCards() {
     //create a div who's gonna contain the form who's check if a atendee is free for a specifique date
   }
 }
-
+console.log("voici le tableauuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu : ",safeData);
 function openAttendeeModal(dates) {
   const MODAL = document.querySelector("#attendeeModal");
   const MODAL_CONTENT = document.querySelector("#modalContent");
@@ -314,6 +330,7 @@ export const editEvent = async (eventData) => {
     };
     try {
       await patchApi(eventData.id, updatedEvent);
+      await postLog(eventData.id, updatedEvent);
       showSnackbar("Event updated successfully!", "green");
       modal.style.display = "none";
     } catch (error) {
@@ -342,6 +359,7 @@ const getDate = (dateValue) => {
     ? dateValue.date
     : dateValue;
 };
+
 
 
 // appelle de la modal 

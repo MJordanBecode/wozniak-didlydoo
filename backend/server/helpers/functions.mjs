@@ -65,3 +65,16 @@ export const getDB = async () => {
   await db.read()
   return db
 }
+
+export const getDBLog = async () => {
+  const __dirname = dirname(fileURLToPath(import.meta.url));  // Obtenez le répertoire courant
+  const adapter = new JSONFile(join(__dirname, '../db/logDb.json')); // Créez l'adaptateur LowDB pour le fichier logDb.json
+  const db = new Low(adapter);  // Créez une instance de LowDB
+
+  await db.read();  // Lire les données du fichier
+  db.data = db.data || { logs: [] };  // Si db.data est undefined, initialisez-le avec un tableau "logs"
+  
+  console.log("Logs récupérés : ", db.data.logs); // Log les données pour vérifier
+
+  return db;  // Retourner l'objet db avec les données des logs
+}
