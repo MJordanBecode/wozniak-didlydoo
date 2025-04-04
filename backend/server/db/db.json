@@ -1,15 +1,15 @@
 [
   {
     "id": "5e786179d8fd",
-    "name": "Event1",
+    "name": "Event1Edited",
     "author": "Author1",
     "description": "Desc1",
     "dates": [
       "2025-04-19"
     ],
     "created_at": "2025-04-03T18:53:38.594Z",
-    "num_modification": 0,
-    "last_modification": "2025-04-03T18:53:38.594Z",
+    "num_modification": 1,
+    "last_modification": "2025-04-04T07:53:05.825Z",
     "attendees": []
   },
   {

@@ -26,7 +26,7 @@ export async function createCards() {
 
     const MENU_ICON_SELECT = document.createElement("img");
     MENU_ICON_SELECT.className = "menuIcon";
-    MENU_ICON_SELECT.src = "../frontend/assets/icons/menu-icon.svg";
+    MENU_ICON_SELECT.src = "assets/icons/menu-icon.svg";
     CARD_HEADER.appendChild(MENU_ICON_SELECT);
 
     const MENU_DROPDOWN = document.createElement("div");
@@ -34,27 +34,27 @@ export async function createCards() {
 
     const MENU_ITEMS = [
       {
-        icon: "../frontend/assets/icons/trash-icon.svg",
+        icon: "assets/icons/trash-icon.svg",
         text: "Delete",
         action: () => deleteEvent(data[i].id),
       },
       {
-        icon: "../frontend/assets/icons/edit-icon.svg",
+        icon: "assets/icons/edit-icon.svg",
         text: "Edit",
         action: () => editEvent(data[i]),
       },
       {
-        icon: "../frontend/assets/icons/accept-icon.svg",
+        icon: "assets/icons/accept-icon.svg",
         text: "Accept",
         action: () => acceptEvent(data[i].id),
       },
       {
-        icon: "../frontend/assets/icons/cross-icon.svg",
+        icon: "assets/icons/cross-icon.svg",
         text: "Reject",
         action: () => rejectEvent(data[i].id),
       },
       {
-        icon: "../frontend/assets/icons/info-icon.svg",
+        icon: "assets/icons/info-icon.svg",
         text: "Show Logs",
         action: () => showLogs(data[i].id),
       },
@@ -174,11 +174,11 @@ function openAttendeeModal(dates) {
       ICON.style.height = "20px";
 
       if (attendee.available === true) {
-        ICON.src = "../frontend/assets/icons/accept-icon.svg";
+        ICON.src = "assets/icons/accept-icon.svg";
       } else if (attendee.available === false) {
-        ICON.src = "../frontend/assets/icons/cross-icon.svg";
+        ICON.src = "assets/icons/cross-icon.svg";
       } else {
-        ICON.src = "../frontend/assets/icons/question-icon.svg";
+        ICON.src = "assets/icons/question-icon.svg";
       }
 
       CELL.appendChild(ICON);
@@ -308,7 +308,6 @@ export const editEvent = async (eventData) => {
       name: document.getElementById("editEventName").value.trim(),
       author: document.getElementById("editEventAuthor").value.trim(),
       description: document.getElementById("editEventDescription").value.trim(),
-      dates: selectedEditDates,
     };
     try {
       await patchApi(eventData.id, updatedEvent);
