@@ -1,20 +1,48 @@
 [
   {
     "id": "3f30e3e5fbb6",
-    "name": "hnghcghjdghjdg",
+    "name": "Edited1",
     "author": "ghjdghjdgh",
     "description": "ghndfgh",
     "dates": [
       "2025-04-27"
     ],
     "created_at": "2025-04-04T23:21:28.154Z",
-    "num_modification": 0,
-    "last_modification": "2025-04-04T23:21:28.154Z",
-    "attendees": []
+    "num_modification": 1,
+    "last_modification": "2025-04-04T23:37:24.473Z",
+    "attendees": [
+      {
+        "name": "Jean-Daniel",
+        "dates": [
+          {
+            "date": "2025-04-27",
+            "available": true
+          }
+        ]
+      },
+      {
+        "name": "Mariia",
+        "dates": [
+          {
+            "date": "2025-04-27",
+            "available": false
+          }
+        ]
+      },
+      {
+        "name": "Michou",
+        "dates": [
+          {
+            "date": "2025-04-27",
+            "available": false
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "e2a69ffa9d18",
-    "name": "hdhdhyd",
+    "name": "hdhdhyd123",
     "author": "Author1",
     "description": "ghng",
     "dates": [
@@ -22,9 +50,36 @@
       "2025-04-20"
     ],
     "created_at": "2025-04-04T23:21:17.120Z",
-    "num_modification": 0,
-    "last_modification": "2025-04-04T23:21:17.120Z",
-    "attendees": []
+    "num_modification": 2,
+    "last_modification": "2025-04-04T23:35:59.169Z",
+    "attendees": [
+      {
+        "name": "Mariia",
+        "dates": [
+          {
+            "date": "2025-04-18",
+            "available": true
+          },
+          {
+            "date": "2025-04-20",
+            "available": true
+          }
+        ]
+      },
+      {
+        "name": "Michou",
+        "dates": [
+          {
+            "date": "2025-04-18",
+            "available": true
+          },
+          {
+            "date": "2025-04-20",
+            "available": false
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "cf7ed82491e6",

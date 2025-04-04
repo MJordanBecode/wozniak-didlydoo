@@ -381,8 +381,8 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
       ...document.querySelectorAll("input[name='selectedDates']:checked"),
     ].map((input) => input.value);
 
-    if (!attendeeName || selectedDates.length === 0) {
-      alert("Please enter your name and select at least one date.");
+    if (!attendeeName) {
+      alert("Please enter your name.");
       return;
     }
 
