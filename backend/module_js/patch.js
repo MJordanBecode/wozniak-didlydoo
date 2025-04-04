@@ -21,12 +21,15 @@ export default async function patchApi(id, data){
     }
 }
 
-export async function attendEventApi(eventId, name, availableDates) {
+export async function attendEventApi(eventId, name, selectedDates, allEventDates) {
     const apiUrl = `http://localhost:3000/api/events/${eventId}/attend`;
-    
+
     const requestBody = {
         name,
-        dates: availableDates.map(date => ({ date, available: true }))
+        dates: allEventDates.map(date => ({
+            date,
+            available: selectedDates.includes(date)
+        }))
     };
 
     try {
@@ -45,25 +48,6 @@ export async function attendEventApi(eventId, name, availableDates) {
             });
         }
     } catch (error) {
-        console.error("Error accepting event:", error);
-    }
-}
-
-export async function rejectEventApi(eventId, name, eventDates) {
-    const apiUrl = `http://localhost:3000/api/events/${eventId}/attend`;
-
-    const requestBody = {
-        name,
-        dates: eventDates.map(date => ({ date, available: false }))
-    };
-
-    try {
-        await fetch(apiUrl, {
-            method: "PATCH",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(requestBody),
-        });
-    } catch (error) {
-        console.error("Error rejecting event:", error);
+        console.error("Error submitting attendance:", error);
     }
 }

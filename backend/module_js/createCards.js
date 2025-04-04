@@ -1,12 +1,11 @@
 import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
-import patchApi, { attendEventApi, rejectEventApi } from "./patch.js";
+import patchApi, { attendEventApi } from "./patch.js";
 
 const data = await getAllEvent();
 
 export async function createCards() {
-
   const EVENTS_CONTAINER = document.querySelector(".events");
 
   for (let i = 0; i < data.length; i++) {
@@ -47,12 +46,7 @@ export async function createCards() {
       {
         icon: "assets/icons/accept-icon.svg",
         text: "Accept",
-        action: () => acceptEvent(data[i].id),
-      },
-      {
-        icon: "assets/icons/cross-icon.svg",
-        text: "Reject",
-        action: () => rejectEvent(data[i].id),
+        action: () => toggleAttendance(data[i].id),
       },
       {
         icon: "assets/icons/info-icon.svg",
@@ -335,7 +329,7 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
 
   modal.innerHTML = `
     <div class="modal-content">
-      <h2>${actionType === "accept" ? "Accept Event" : "Reject Event"}</h2>
+      <h2>Accept Event</h2>
       <form id="attendanceForm">
         <label for="attendeeName">Your Name:</label>
         <input type="text" id="attendeeName" required />
@@ -351,7 +345,7 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
           `).join('')}
         </div>
 
-        <button type="submit">${actionType === "accept" ? "Accept" : "Reject"}</button>
+        <button type="submit">Accept</button>
       </form>
     </div>
   `;
@@ -370,13 +364,8 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
     }
 
     try {
-      if (actionType === "accept") {
-        await attendEventApi(eventId, attendeeName, selectedDates);
-        showSnackbar("Attendance confirmed!", "green");
-      } else {
-        await rejectEventApi(eventId, attendeeName, selectedDates);
-        showSnackbar("Event rejected successfully!", "green");
-      }
+      await attendEventApi(eventId, attendeeName, selectedDates, availableDates.map(d => d.date));
+      showSnackbar("Attendance updated!", "green");
       modal.style.display = "none";
     } catch (error) {
       console.error("Error submitting attendance:", error);
@@ -385,14 +374,9 @@ function openAttendanceForm(eventId, actionType, availableDates = []) {
   };
 }
 
-function acceptEvent(eventId) {
+function toggleAttendance(eventId) {
   const dates = data.find((event) => event.id === eventId).dates || null;
   openAttendanceForm(eventId, "accept", dates);
-}
-
-function rejectEvent(eventId) {
-  const dates = data.find((event) => event.id === eventId).dates || null;
-  openAttendanceForm(eventId, "reject", dates);
 }
 
 function showLogs(id) {

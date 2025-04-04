@@ -1,32 +1,96 @@
 [
   {
-    "id": "83be6c13c7e0",
-    "name": "Event2",
-    "author": "Author2",
-    "description": "Desc3",
+    "id": "9792856e47de",
+    "name": "Event1gfgs",
+    "author": "gsfgsfg",
+    "description": "gsfg",
     "dates": [
-      "2025-04-19",
+      "2025-04-11",
+      "2025-04-15",
       "2025-04-22",
       "2025-04-27"
     ],
-    "created_at": "2025-04-04T16:21:57.976Z",
+    "created_at": "2025-04-04T21:25:32.009Z",
     "num_modification": 0,
-    "last_modification": "2025-04-04T16:21:57.976Z",
+    "last_modification": "2025-04-04T21:25:32.009Z",
     "attendees": [
       {
         "name": "Mariia",
         "dates": [
           {
-            "date": "2025-04-27"
+            "date": "2025-04-11",
+            "available": true
           },
           {
-            "date": "2025-04-19"
+            "date": "2025-04-15",
+            "available": false
+          },
+          {
+            "date": "2025-04-22",
+            "available": false
+          },
+          {
+            "date": "2025-04-27",
+            "available": true
           }
         ]
       },
       {
         "name": "Michou",
         "dates": [
+          {
+            "date": "2025-04-11",
+            "available": false
+          },
+          {
+            "date": "2025-04-15",
+            "available": false
+          },
+          {
+            "date": "2025-04-22",
+            "available": false
+          },
+          {
+            "date": "2025-04-27",
+            "available": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "71369dbef42d",
+    "name": "Event2",
+    "author": "Author1",
+    "description": "Desc1",
+    "dates": [
+      "2025-04-18",
+      "2025-04-27"
+    ],
+    "created_at": "2025-04-04T21:23:39.615Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T21:23:39.615Z",
+    "attendees": [
+      {
+        "name": "Mariia",
+        "dates": [
+          {
+            "date": "2025-04-18",
+            "available": false
+          },
+          {
+            "date": "2025-04-27",
+            "available": true
+          }
+        ]
+      },
+      {
+        "name": "Jean-Daniel",
+        "dates": [
+          {
+            "date": "2025-04-18",
+            "available": true
+          },
           {
             "date": "2025-04-27",
             "available": false
@@ -36,31 +100,27 @@
     ]
   },
   {
-    "id": "5e786179d8fd",
-    "name": "Event1Edited",
+    "id": "ad00abd25357",
+    "name": "Event1",
     "author": "Author1",
     "description": "Desc1",
     "dates": [
-      "2025-04-19"
+      "2025-04-06",
+      "2025-04-12"
     ],
-    "created_at": "2025-04-03T18:53:38.594Z",
-    "num_modification": 1,
-    "last_modification": "2025-04-04T07:53:05.825Z",
+    "created_at": "2025-04-04T20:59:55.086Z",
+    "num_modification": 0,
+    "last_modification": "2025-04-04T20:59:55.086Z",
     "attendees": [
-      {
-        "name": "Mariia",
-        "dates": [
-          {
-            "date": "2025-04-19",
-            "available": false
-          }
-        ]
-      },
       {
         "name": "Michou",
         "dates": [
           {
-            "date": "2025-04-19",
+            "date": "2025-04-06",
+            "available": true
+          },
+          {
+            "date": "2025-04-12",
             "available": true
           }
         ]
@@ -69,7 +129,37 @@
         "name": "yydjf",
         "dates": [
           {
-            "date": "2025-04-19",
+            "date": "2025-04-06",
+            "available": true
+          },
+          {
+            "date": "2025-04-12",
+            "available": true
+          }
+        ]
+      },
+      {
+        "name": "Mariia",
+        "dates": [
+          {
+            "date": "2025-04-06",
+            "available": true
+          },
+          {
+            "date": "2025-04-12",
+            "available": false
+          }
+        ]
+      },
+      {
+        "name": "Michouffffdfddfs",
+        "dates": [
+          {
+            "date": "2025-04-06",
+            "available": true
+          },
+          {
+            "date": "2025-04-12",
             "available": true
           }
         ]
@@ -92,6 +182,18 @@
         "name": "Michou",
         "dates": [
           {
+            "date": "2022-03-17",
+            "available": false
+          },
+          {
+            "date": "2022-03-18",
+            "available": true
+          },
+          {
+            "date": "2022-03-21",
+            "available": false
+          },
+          {
             "date": "2022-03-22",
             "available": true
           }
@@ -102,10 +204,18 @@
         "dates": [
           {
             "date": "2022-03-17",
+            "available": true
+          },
+          {
+            "date": "2022-03-18",
             "available": false
           },
           {
             "date": "2022-03-21",
+            "available": true
+          },
+          {
+            "date": "2022-03-22",
             "available": true
           }
         ]
@@ -133,6 +243,22 @@
         "dates": [
           {
             "date": "2022-01-10",
+            "available": false
+          },
+          {
+            "date": "2022-02-10",
+            "available": true
+          },
+          {
+            "date": "2022-03-10",
+            "available": true
+          },
+          {
+            "date": "2022-03-11",
+            "available": false
+          },
+          {
+            "date": "2022-03-12",
             "available": true
           }
         ]
@@ -159,6 +285,31 @@
           {
             "date": "2022-03-12",
             "available": false
+          }
+        ]
+      },
+      {
+        "name": "Jane Dou",
+        "dates": [
+          {
+            "date": "2022-01-10",
+            "available": true
+          },
+          {
+            "date": "2022-02-10",
+            "available": false
+          },
+          {
+            "date": "2022-03-10",
+            "available": false
+          },
+          {
+            "date": "2022-03-11",
+            "available": false
+          },
+          {
+            "date": "2022-03-12",
+            "available": true
           }
         ]
       }
