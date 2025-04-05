@@ -1,3 +1,6 @@
-header{
-    color: red;
+header {
+  background-color: #008080;
+  padding: 20px;
+  color: white;
+  border-radius: 0 0 30px 30px;
 }
