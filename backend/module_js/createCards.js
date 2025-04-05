@@ -8,6 +8,11 @@ import modalLog from "../../frontend/scripts/modal/modalLog.js";
 
 const modal_Log = modalLog();
 const safeData = [];
+
+async function showLogs(id) {
+  const modal = await modalLog(id); // Attends que la modal soit créée
+  modal.show();
+}
 export async function createCards() {
   const data = await getAllEvent();
 
@@ -67,14 +72,10 @@ export async function createCards() {
         action: () => rejectEvent(data[i].id),
       },
       {
-   icon: "assets/icons/info-icon.svg",
-   text: "Show Logs",
-   action: () => {
-       const { id, lastDate, newDate, changedElement, newElement } = data[i];
-       const modal = modalLog(id, lastDate, newDate, changedElement, newElement);
-       modal.show();
-   }
-}
+        icon: "assets/icons/info-icon.svg",
+        text: "Show Logs",
+        action: () => showLogs(data[i].id) // Appelle la fonction async proprement
+      }
     
     
     ];
@@ -350,9 +351,7 @@ function rejectEvent(id) {
   console.log(`Rejecting event with ID: ${id}`);
 }
 
-function showLogs(id) {
-  console.log(`Showing logs for event ID: ${id}`);
-}
+
 
 const getDate = (dateValue) => {
   return typeof dateValue === "object" && dateValue !== null
