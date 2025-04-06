@@ -1,0 +1,292 @@
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: flex-start; /* Changed from center to flex-start */
+    padding: 20px; /* Added padding */
+    overflow-y: auto; /* Added scroll to the modal container */
+  }
+  
+  .modal-content {
+    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1200px;
+    max-height: calc(100vh - 40px); /* Adjusted max-height */
+    overflow: auto;
+    padding: 20px;
+    margin: 20px auto; /* Added margin to center and provide space */
+  }
+  
+  /* Close button */
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #666;
+    z-index: 10;
+  }
+  
+  .close-modal:hover {
+    color: #000;
+  }
+  
+  /* Header styles */
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eaeef3;
+  }
+  
+  .modal-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+  
+  .modal-title svg {
+    color: #0ea5e9;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    background-color: #fff;
+    color: #475569;
+    transition: all 0.2s ease;
+  }
+  
+  .btn:hover {
+    background-color: #f8fafc;
+  }
+  
+  .btn-refresh {
+    background-color: #0ea5e9;
+    color: white;
+    border-color: #0ea5e9;
+  }
+  
+  .btn-refresh:hover {
+    background-color: #0284c7;
+  }
+  
+  /* Table styles */
+  /* Make sure the table doesn't overflow on small screens */
+  .logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 14px;
+    table-layout: fixed; /* Added fixed layout */
+  }
+  
+  .logs-table th,
+  .logs-table td {
+    word-break: break-word; /* Allow text to break */
+  }
+  
+  /* Adjust column widths */
+  .logs-table th:nth-child(1),
+  .logs-table td:nth-child(1) {
+    /* ID column */
+    width: 10%;
+  }
+  
+  .logs-table th:nth-child(2),
+  .logs-table td:nth-child(2) /* Previous date */,
+  .logs-table th:nth-child(3),
+  .logs-table td:nth-child(3) {
+    /* New date */
+    width: 20%;
+  }
+  
+  .logs-table th:nth-child(4),
+  .logs-table td:nth-child(4) {
+    /* Changed elements */
+    width: 30%;
+  }
+  
+  .logs-table th:nth-child(5),
+  .logs-table td:nth-child(5) {
+    /* New element */
+    width: 20%;
+  }
+  
+  .logs-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .logs-table .even-row {
+    background-color: #f8fafc;
+  }
+  
+  .log-id {
+    color: #0ea5e9;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .log-id:hover {
+    text-decoration: underline;
+  }
+  
+  .time-badge {
+    display: inline-block;
+    background-color: #f1f5f9;
+    color: #64748b;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  
+  .code-block {
+    background-color: #1e293b;
+    color: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 13px;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #94a3b8;
+    padding: 30px 0;
+  }
+  
+  /* Pagination styles */
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #eaeef3;
+  }
+  
+  .pagination-info {
+    color: #64748b;
+    font-size: 14px;
+  }
+  
+  .pagination-controls {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .page-btn {
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+    background-color: #fff;
+    color: #64748b;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+  }
+  
+  .page-btn:hover:not(.active):not([disabled]) {
+    background-color: #f8fafc;
+  }
+  
+  .page-btn.active {
+    background-color: #0ea5e9;
+    color: white;
+    border-color: #0ea5e9;
+  }
+  
+  .page-btn[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .modal {
+      padding: 10px;
+      align-items: flex-start;
+    }
+  
+    .modal-content {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      max-height: calc(100vh - 20px);
+    }
+  
+    .modal-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+  
+    .action-buttons {
+      width: 100%;
+      justify-content: space-between;
+    }
+  
+    .logs-table {
+      display: block;
+      overflow-x: auto;
+      table-layout: auto; /* Revert to auto for mobile */
+    }
+  
+    .logs-table th,
+    .logs-table td {
+      min-width: 120px; /* Ensure minimum width for readability */
+    }
+  
+    .pagination {
+      flex-direction: column;
+      gap: 15px;
+      align-items: flex-start;
+    }
+  
+    .pagination-controls {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  
