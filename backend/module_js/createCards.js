@@ -2,13 +2,28 @@ import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
 import patchApi, { attendEventApi } from "./patch.js";
-
+import  postLog  from "../log/post.js";
+import modalLog from "../../frontend/scripts/modal/modalLog.js";
 const data = await getAllEvent();
 
+
+
+
+const modal_Log = modalLog();
+const safeData = [];
+
+async function showLogs(id) {
+  const modal = await modalLog(id); // Attends que la modal soit créée
+  modal.show();
+}
 export async function createCards() {
   const EVENTS_CONTAINER = document.querySelector(".events");
 
   for (let i = 0; i < data.length; i++) {
+    
+    safeData.push(data[i]);
+    
+    
     const CARD_SELECT = document.createElement("div");
     CARD_SELECT.className = "cardEvent";
     EVENTS_CONTAINER.appendChild(CARD_SELECT);
@@ -32,6 +47,10 @@ export async function createCards() {
     const MENU_DROPDOWN = document.createElement("div");
     MENU_DROPDOWN.className = "menuDropdown";
 
+    let lastDate = "3";
+    let newDate = "4";
+    let changedElement = "5";
+    let newElement = "6";
     const MENU_ITEMS = [
       {
         icon: "assets/icons/trash-icon.svg",
@@ -51,8 +70,10 @@ export async function createCards() {
       {
         icon: "assets/icons/info-icon.svg",
         text: "Show Logs",
-        action: () => showLogs(data[i].id),
-      },
+        action: () => showLogs(data[i].id) // Appelle la fonction async proprement
+      }
+    
+    
     ];
 
     MENU_ITEMS.forEach((item) => {
@@ -114,7 +135,7 @@ export async function createCards() {
     //create a div who's gonna contain the form who's check if a atendee is free for a specifique date
   }
 }
-
+console.log("voici le tableauuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu : ",safeData);
 function openAttendeeModal(dates) {
   const MODAL = document.querySelector("#attendeeModal");
   const MODAL_CONTENT = document.querySelector("#modalContent");
@@ -315,6 +336,7 @@ export const editEvent = async (eventData) => {
     };
     try {
       await patchApi(eventData.id, updatedEvent);
+      await postLog(eventData.id, updatedEvent);
       showSnackbar("Event updated successfully!", "green");
       modal.style.display = "none";
     } catch (error) {
@@ -414,12 +436,14 @@ function toggleAttendance(eventId) {
   openAttendanceForm(eventId, "accept", dates);
 }
 
-function showLogs(id) {
-  console.log(`Showing logs for event ID: ${id}`);
-}
+
 
 const getDate = (dateValue) => {
   return typeof dateValue === "object" && dateValue !== null
     ? dateValue.date
     : dateValue;
 };
+
+
+
+// appelle de la modal 
