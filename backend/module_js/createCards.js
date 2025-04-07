@@ -9,7 +9,7 @@ import modalLog from "../../frontend/scripts/modal/modalLog.js";
 const data = await getAllEvent();
 
 
-
+// renvoie des données pour la dev
 
 const modal_Log = modalLog();
 const safeData = [];
