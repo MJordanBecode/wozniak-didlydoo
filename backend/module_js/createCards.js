@@ -2,6 +2,8 @@ import { showSnackbar } from "../../frontend/scripts/ui.js";
 import deleteApi from "./delete.js";
 import { getAllEvent } from "./getDB.js";
 import patchApi, { attendEventApi } from "./patch.js";
+import indexOfMax from "./indexOfMax.js";
+
 import  postLog  from "../log/post.js";
 import modalLog from "../../frontend/scripts/modal/modalLog.js";
 const data = await getAllEvent();
@@ -135,7 +137,10 @@ export async function createCards() {
     //create a div who's gonna contain the form who's check if a atendee is free for a specifique date
   }
 }
-console.log("voici le tableauuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu : ",safeData);
+
+
+const BEST_DATE_SELECT = document.createElement("p");
+
 function openAttendeeModal(dates) {
   const MODAL = document.querySelector("#attendeeModal");
   const MODAL_CONTENT = document.querySelector("#modalContent");
@@ -168,6 +173,7 @@ function openAttendeeModal(dates) {
     HEADER_ROW.appendChild(TH);
   });
 
+  let i=1;
   TABLE.appendChild(HEADER_ROW);
   let numOfCheck =[];
   dates.forEach((date) => {
@@ -175,6 +181,8 @@ function openAttendeeModal(dates) {
 
     const DATE_CELL = document.createElement("td");
     DATE_CELL.textContent = date.date;
+    DATE_CELL.id= `td${i}`
+    i++
     DATE_CELL.style.border = "1px solid black";
     DATE_CELL.style.padding = "10px";
     ROW.appendChild(DATE_CELL);
@@ -206,13 +214,20 @@ function openAttendeeModal(dates) {
     let okCheck = ROW.getElementsByClassName("okCheck");
     
     numOfCheck.push(okCheck.length)
-    console.log("teeeeeeeeeeeeeeeessssssssssst",numOfCheck)
-
+    
     TABLE.appendChild(ROW);
   });
-
+  
   MODAL_CONTENT.appendChild(TABLE);
   MODAL.style.display = "flex";
+  
+  let maxIndex = indexOfMax(numOfCheck);
+  let bestDate = document.getElementById(`td${maxIndex+1}`).innerHTML;
+  let innerBestDate = `Best date : ${bestDate}`
+  
+  
+  BEST_DATE_SELECT.innerHTML = innerBestDate;
+  MODAL_CONTENT.appendChild(BEST_DATE_SELECT);
 }
 
 document.querySelector("#closeModal").addEventListener("click", () => {
