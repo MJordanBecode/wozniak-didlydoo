@@ -1,13 +1,16 @@
 export const toggleForm = (show) => {
     const showFormBtn = document.getElementById("showFormBtn");
     const eventForm = document.getElementById("eventForm");
+    const container = document.querySelector(".container");
 
     if (show) {
         showFormBtn.style.display = "none";
         eventForm.classList.remove("hidden");
+        container.classList.remove("hidden"); 
     } else {
         showFormBtn.style.display = "inline-block";
         eventForm.classList.add("hidden");
+        container.classList.add("hidden"); 
     }
 };
 

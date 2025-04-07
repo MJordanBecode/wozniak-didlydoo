@@ -1,25 +1,39 @@
 @import "./header/header.css";
 @import "./footer/footer.css";
 @import "./modal/modalLog.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f8ff;
   color: #333;
   text-align: center;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .container {
+  min-width: 450px;
   max-width: 600px;
-  margin: auto;
+  margin: 30px auto;
   background: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  color: #008080;
 }
 
 .hidden {
@@ -36,7 +50,8 @@ label {
   font-weight: bold;
 }
 
-#closeEditModal, #closeFormIcon {
+#closeEditModal,
+#closeFormIcon {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -63,6 +78,17 @@ input {
   display: block;
 }
 
+#showFormBtn {
+  background-color: #008080;
+  color: white;
+  border: none;
+  padding: 20px 25px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 30px;
+  font-size: 16px;
+}
+
 button {
   background-color: #008080;
   color: white;
@@ -70,12 +96,15 @@ button {
   padding: 10px 15px;
   cursor: pointer;
   border-radius: 5px;
-  margin-top: 10px;
+  font-size: 16px;
+  margin: 15px 0;
 }
 
-button:hover {
+#showFormBtn:hover, button:hover {
   background-color: #005f5f;
 }
+
+
 
 form {
   margin-top: 20px;
@@ -165,6 +194,7 @@ li button:hover {
 .events {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cardEvent {
@@ -175,7 +205,7 @@ li button:hover {
   padding: 15px;
   margin: 10px;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -282,7 +312,7 @@ li button:hover {
 }
 
 .modal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -299,9 +329,9 @@ li button:hover {
   padding: 20px;
   border-radius: 10px;
   width: 90%;
-  max-width: 500px; 
+  max-width: 500px;
   max-height: 70vh;
-  overflow-y: auto; 
+  overflow-y: auto;
   text-align: center;
   position: relative;
 }
@@ -316,4 +346,78 @@ li button:hover {
 
 .close:hover {
   color: darkred;
+}
+
+.close-icon-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.date-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative;
+  padding-left: 30px;
+  user-select: none;
+}
+
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ddd;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #007bff;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkbox-container .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
 }
